@@ -12,7 +12,7 @@ class OrderController < ApplicationController
     @product = Product.find(params[:product_id])
  
     payment = PagSeguro::CreditCardTransactionRequest.new
-    payment.notification_url = "https://secret-wave-53573.herokuapp.com/notification  "
+    payment.notification_url = "https://sheltered-harbor-15638.herokuapp.com/"
     payment.payment_mode = "gateway"
  
     # Aqui vão os itens que serão cobrados na transação, caso você tenha multiplos itens
@@ -24,7 +24,7 @@ class OrderController < ApplicationController
     payment.create
  
     # Cria uma Order para registro das transações
-    Order.create(product_id: @product.id, buyer_name: params[:name], reference: reference, status: 'pending')
+    Order.create(product_id: @product.id, buyer_name: params[:name], reference: payment.reference, status: 'pending')
  
     if payment.errors.any?
      puts "=> ERRORS"

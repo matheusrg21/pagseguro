@@ -81,5 +81,5 @@ test:
 production:
   <<: *default
   database: pagseguro_production
-  username: pagseguro
+  username: matheus
   password: <%= ENV['PAGSEGURO_DATABASE_PASSWORD'] %>
